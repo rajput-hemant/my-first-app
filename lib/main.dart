@@ -6,21 +6,27 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-//  Version 3 - Added onPressed fn(s) for RaisedButton 
+//  Version 4 - Added question list
 
 class MyApp extends StatelessWidget {
+  var questionIndex = 0;
   void answerQuestion() {
-    print('Answer 1 Choosen!');
+    questionIndex += 1;
+    print(questionIndex);
   }
 
   @override
   Widget build(BuildContext context) {
+    var questions = [
+      'What\'s your favourite color?',
+      'What\'s your favourite animal?',
+    ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text('My First App!')),
         body: Column(
           children: [
-            Text('The Question!'),
+            Text(questions[questionIndex]),
             RaisedButton(
               child: Text('Answer 1'),
               onPressed: answerQuestion,
@@ -42,6 +48,43 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+//  Version 3 - Added onPressed fn(s) for RaisedButton
+
+// class MyApp extends StatelessWidget {
+//   void answerQuestion() {
+//     print('Answer 1 Choosen!');
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(title: Text('My First App!')),
+//         body: Column(
+//           children: [
+//             Text('The Question!'),
+//             RaisedButton(
+//               child: Text('Answer 1'),
+//               onPressed: answerQuestion,
+//             ),
+//             RaisedButton(
+//               child: Text('Answer 2'),
+//               onPressed: () => print('Answer 2 Choosen!'),
+//             ),
+//             RaisedButton(
+//               child: Text('Answer 3'),
+//               onPressed: () {
+//                 // do something
+//                 print('Answer 3 Choosen!');
+//               },
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 //  Version 2 - Added text and buttons
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'question.dart';
+import 'answer.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatefulWidget {
   State<StatefulWidget> createState() => _MyAppState();
 }
 
-//  Version 6 - created question widget to handle questions seperately
+//  Version 7 - created answer widget to handle answers seperately
 
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
@@ -38,27 +39,63 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             Question(questions[_questionIndex]),
-            RaisedButton(
-              child: Text('Answer 1'),
-              onPressed: _answerQuestion,
-            ),
-            RaisedButton(
-              child: Text('Answer 2'),
-              onPressed: () => print('Answer 2 Choosen!'),
-            ),
-            RaisedButton(
-              child: Text('Answer 3'),
-              onPressed: () {
-                // do something
-                print('Answer 3 Choosen!');
-              },
-            ),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
           ],
         ),
       ),
     );
   }
 }
+
+//  Version 6 - created question widget to handle questions seperately
+
+// class _MyAppState extends State<MyApp> {
+//   var _questionIndex = 0;
+
+//   void _answerQuestion() {
+//     // for changing the state of the body text
+//     setState(() {
+//       _questionIndex += 1;
+//     });
+//     // _questionIndex += 1;
+//     print(_questionIndex);
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     var questions = [
+//       'What\'s your favourite color?',
+//       'What\'s your favourite animal?',
+//     ];
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(title: Text('My First App!')),
+//         body: Column(
+//           children: [
+//             Question(questions[_questionIndex]),
+//             RaisedButton(
+//               child: Text('Answer 1'),
+//               onPressed: _answerQuestion,
+//             ),
+//             RaisedButton(
+//               child: Text('Answer 2'),
+//               onPressed: () => print('Answer 2 Choosen!'),
+//             ),
+//             RaisedButton(
+//               child: Text('Answer 3'),
+//               onPressed: () {
+//                 // do something
+//                 print('Answer 3 Choosen!');
+//               },
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 //  Version 5 - refactored StatelessWidget to StatefulWidget abstract class 
 

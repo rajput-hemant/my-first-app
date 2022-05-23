@@ -1,0 +1,6 @@
+{
+    "[dart]": {
+        "editor.tabCompletion": "off"
+    },
+    "cmake.configureOnOpen": false
+}

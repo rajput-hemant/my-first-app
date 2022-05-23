@@ -13,8 +13,7 @@ class MyApp extends StatefulWidget {
   State<StatefulWidget> createState() => _MyAppState();
 }
 
-//  Version 8 - Updated questions var list if map w/ questionText & answers as key-value pairs
-// question list is then mapped to list of Answer widgets
+//  Version 9 - Added Ternar Conditional Operator, to avoid app crash when questionIndex goes out of range
 
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
@@ -30,7 +29,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
+    List<Map> questions = [
       {
         'questionText': 'What\'s your favourite color?',
         'answers': ['Black', 'Red', 'White', 'Green'],
@@ -45,19 +44,69 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('My First App!'),
         ),
-        body: Column(
-          children: [
-            Question(
-              questions[_questionIndex]['questionText'] as String,
-            ),
-            ...(questions[_questionIndex]['answers'] as List<String>)
-                .map((answer) => Answer(_answerQuestion, answer))
-          ],
-        ),
+        body: _questionIndex < questions.length
+            ? Column(
+                children: [
+                  Question(
+                    questions[_questionIndex]['questionText'],
+                  ),
+                  ...(questions[_questionIndex]['answers'] as List<String>)
+                      .map((answer) => Answer(_answerQuestion, answer))
+                ],
+              )
+            : Center(
+                child: Text('You did it!'),
+              ),
       ),
     );
   }
 }
+
+//  Version 8 - Updated questions var list if map w/ questionText & answers as key-value pairs
+// question list is then mapped to list of Answer widgets
+
+// class _MyAppState extends State<MyApp> {
+//   var _questionIndex = 0;
+
+//   void _answerQuestion() {
+//     // for changing the state of the body text
+//     setState(() {
+//       _questionIndex += 1;
+//     });
+//     // _questionIndex += 1;
+//     print(_questionIndex);
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     var questions = [
+//       {
+//         'questionText': 'What\'s your favourite color?',
+//         'answers': ['Black', 'Red', 'White', 'Green'],
+//       },
+//       {
+//         'questionText': 'What\'s your favourite animal?',
+//         'answers': ['Dog', 'Cat', 'Lion', 'Horse'],
+//       },
+//     ];
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('My First App!'),
+//         ),
+//         body: Column(
+//           children: [
+//             Question(
+//               questions[_questionIndex]['questionText'] as String,
+//             ),
+//             ...(questions[_questionIndex]['answers'] as List<String>)
+//                 .map((answer) => Answer(_answerQuestion, answer))
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 //  Version 7 - created answer widget to handle answers seperately
 
@@ -143,7 +192,7 @@ class _MyAppState extends State<MyApp> {
 //   }
 // }
 
-//  Version 5 - refactored StatelessWidget to StatefulWidget abstract class 
+//  Version 5 - refactored StatelessWidget to StatefulWidget abstract class
 
 // class _MyAppState extends State<MyApp> {
 //   var _questionIndex = 0;

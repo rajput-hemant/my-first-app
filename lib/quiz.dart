@@ -4,7 +4,7 @@ import 'answer.dart';
 
 class Quiz extends StatelessWidget {
   final List<Map> questions;
-  final VoidCallback answerQuestion;
+  final Function answerQuestion;
   final int questionIndex;
 
   Quiz({
@@ -13,6 +13,8 @@ class Quiz extends StatelessWidget {
     required this.questionIndex,
   });
 
+// Version 11 - Adding Scoring System
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,9 +22,23 @@ class Quiz extends StatelessWidget {
         Question(
           questions[questionIndex]['questionText'],
         ),
-        ...(questions[questionIndex]['answers'] as List<String>)
-            .map((answer) => Answer(answerQuestion, answer))
-      ],
+        ...(questions[questionIndex]['answers'] as List<Map>).map((answer) =>
+            Answer(() => answerQuestion(answer['score']), answer['text']))
+      ], 
     );
   }
+
+// Version 10 - Splitting into Widgets
+
+  // Widget build(BuildContext context) {
+  //   return Column(
+  //     children: [
+  //       Question(
+  //         questions[questionIndex]['questionText'],
+  //       ),
+  //       ...(questions[questionIndex]['answers'] as List<String>)
+  //           .map((answer) => Answer(answerQuestion, answer))
+  //     ],
+  //   );
+  // }
 }
